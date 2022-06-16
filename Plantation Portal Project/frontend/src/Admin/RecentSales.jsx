@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useFetch from "../useFetch";
 
 const RecentSales = () => {
@@ -27,7 +28,7 @@ const RecentSales = () => {
                     <li><a href="#">{order.dateTime}</a></li>
                 </ul>
                 <ul className="details">
-                    <li><a href="#">{order.userInfo[0].firstName}</a></li>
+                    <li><a href="#">{order.shippingDetails.firstName+" "+order.shippingDetails.lastName}</a></li>
                 </ul>
                 <ul className="details">
                     <li><a href="#">{order.orderStatus}</a></li>
@@ -40,9 +41,8 @@ const RecentSales = () => {
           ))}
           <div className="button-area ">
             <div className="d-flex">
-              <a className="button button-block button-all" href="#"
-                >See All</a
-              >
+              <Link className="button button-block button-all" to="/admin/orders"
+                >See All</Link>
             </div>
           </div>
         </div>

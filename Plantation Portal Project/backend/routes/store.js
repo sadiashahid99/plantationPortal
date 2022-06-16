@@ -1,10 +1,29 @@
 const router = require('express').Router();
+const { Products } = require('../models/productsModel');
 let Store = require('../models/storeModel');
 
 router.route('/').get((req, res) => {
+
   Store.find()
     .then(Stores => res.json(Stores))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+router.route('/productImage').get((req, res) => {
+  Products.aggregate(
+    [
+      {
+        $lookup: {
+          from: "stores", // collection to join - Should have same name as collection mongoDB
+          localField: "storeId", //field from the input documents
+          foreignField: "_id", //field from the documents of the "from" collection
+          as: "storeInfo", // output array field
+        },
+      },
+      
+    ])
+    .then((result) => {
+      res.status(200).json(result);
+    });
 });
 
 router.route('/:id').delete((req, res) => {

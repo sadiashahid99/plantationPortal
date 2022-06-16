@@ -7,7 +7,8 @@ const messagesSchema = new mongoose.Schema({
     email: { type: String, required: true },
     phoneNo: { type: String, required: true },
     message: { type: String, required: true },
- 
+    status: { type: String, required: true },
+
 });
 
 const Messages = mongoose.model("message", messagesSchema);

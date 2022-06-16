@@ -19,16 +19,11 @@ router.route("/").get((req, res) => {
           "userInfo.password": 0,
         },
       },
-    ],
-    function (error, data) {
-      if (error) {
-        console.log("Error received");
-        res.json([]);
-      }
-      console.log(data);
-      res.json(data);
-    }
-  );
+    ])
+    .sort({ dateTime: -1 })
+    .then((result) => {
+      res.status(200).json(result);
+    });
   // Order.find()
   //   .then(Order => res.json(Order))
   //   .catch(err => res.status(400).json('Error: ' + err));

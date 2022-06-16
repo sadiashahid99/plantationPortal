@@ -1,13 +1,19 @@
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
 import useFetch from "../useFetch";
 import TopBar from "./TopBar";
+import { useUser } from "../userContext";
 
 const Search = () => {
     const {  data: blogs } = useFetch('http://localhost:5000/blogs/')
     const {  data: services } = useFetch('http://localhost:5000/services/')
     const {  data: products } = useFetch('http://localhost:5000/products/allProducts/')
 
+    const navigate = useNavigate();
+    const user = useUser();
+    if (!user._id) {
+      navigate("/login");
+    }
 
     const location = useLocation();
     const searchkey = location.state.searchkey.toLowerCase()
@@ -37,8 +43,6 @@ const Search = () => {
 
 
     return ( 
-        <>
-         <div className="page">
         <section className="home-section">
         <div className="home-content">
           <TopBar/>
@@ -183,11 +187,9 @@ const Search = () => {
           </div>
           </div>
       </section>
-      </div>
 
       
 
-        </>
      );
 }
  

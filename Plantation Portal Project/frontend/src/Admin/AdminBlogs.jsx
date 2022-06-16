@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../useFetch";
 // import"./css/orders.css"
 import TopBar from "./TopBar";
@@ -9,10 +9,15 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { ref, deleteObject } from "firebase/storage";
 import {storage} from '../firebase';
+import { useUser } from "../userContext";
 
 const AdminBlogs = ({count}) => {
   const { error, isPending, data: blogs } = useFetch('http://localhost:5000/blogs/')
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+  const user = useUser();
+  if (!user._id) {
+    navigate("/login");
+  }
 
   const handleDelete = (id)=>{   
     confirmAlert({
@@ -57,7 +62,6 @@ const AdminBlogs = ({count}) => {
   }
   
     return ( 
-      <div className="page">
         <section className="home-section">
         <div className="home-content">
           <TopBar/>
@@ -92,7 +96,6 @@ const AdminBlogs = ({count}) => {
           </div>
           </div>
       </section>
-      </div>
 
      );
 }

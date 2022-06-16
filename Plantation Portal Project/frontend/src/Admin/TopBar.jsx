@@ -33,7 +33,7 @@ const TopBar = () => {
             </form>
             </div>
             <div className="profile-details">
-                <img src="../images/admin_pic.png" alt=""/>
+                <img src={"../images/seller.png"} alt=""/>
                 <span className="admin_name">{user.fname+" "+user.lname}</span>
             </div>
         </div>

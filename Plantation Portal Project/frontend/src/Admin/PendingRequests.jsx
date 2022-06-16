@@ -5,14 +5,19 @@ import TopBar from "./TopBar";
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import { useUser } from "../userContext";
 
 const PendingRequests = () => {
+  const navigate = useNavigate();
+  const user = useUser();
+  if (!user._id) {
+    navigate("/login");
+  }
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
 
     const { error, isPending, data: stores } = useFetch('http://localhost:5000/store/')
-    const navigate = useNavigate();
 
     const handleDelete = (id)=>{   
         confirmAlert({
@@ -82,7 +87,6 @@ const PendingRequests = () => {
     
       }
     return ( 
-      <div className="page">
         <section className="home-section">
             <div className="home-content">
                 < TopBar/>
@@ -131,7 +135,6 @@ const PendingRequests = () => {
                 </div>
             </div>
         </section>
-        </div>
     );
 }
  

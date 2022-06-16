@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 function SellerHome(props) {
   const [numberOfSales, setNumberOfSales] = useState(3);
-  const user = useUser();
   const navigate = useNavigate();
+  const user = useUser();
 
   if (!user._id) {
     // alert("User is not login");

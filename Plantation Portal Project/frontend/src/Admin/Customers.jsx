@@ -3,9 +3,15 @@ import TopBar from "./TopBar";
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../userContext";
 
 const Customers = () => {
+  const navigate = useNavigate();
+  const user = useUser();
+  if (!user._id) {
+    navigate("/login");
+  }
     const { error, isPending, data: users } = useFetch('http://localhost:5000/user/')
     const handleDelete = (id)=>{   
         confirmAlert({
@@ -43,7 +49,6 @@ const Customers = () => {
       }
 
     return ( 
-        <div className="page">
             <section className="home-section">
                 <div className="home-content">
                     <TopBar/>
@@ -88,7 +93,6 @@ const Customers = () => {
                     </div>
                 </div>
             </section>
-        </div>
      );
 }
  

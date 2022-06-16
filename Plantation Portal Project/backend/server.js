@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
 const cookieParser = require("cookie-parser");
 const sessions = require("express-session");
 
@@ -19,6 +20,7 @@ const services = require("./routes/service");
 const { contactRouter } = require("./routes/contactUs");
 const sellerRoute = require("./routes/seller");
 const storeRouter = require("./routes/store");
+const adminRouter = require("./routes/admin")
 
 const app = express();
 
@@ -169,6 +171,7 @@ app.use("/chat", chatRouter);
 app.use("/order", orderRouter);
 app.use("/services", services);
 app.use("/contact", contactRouter);
+app.use("/admin", adminRouter)
 
 const port = process.env.port || 5000;
 app.listen(port, () => {

@@ -47,7 +47,7 @@ const AdminNavbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/admin/earnings">
             <i className='bx bx-wallet-alt'></i>
             <span className="links_name">Earnings</span>
           </Link>
@@ -56,6 +56,12 @@ const AdminNavbar = () => {
           <Link to="/admin/pendingrequests">
             <i className='bx bx-analyse' ></i>
             <span className="links_name">Pending Requests</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/admin/messages">
+            <i className='bx bx-message' ></i>
+            <span className="links_name">Messages</span>
           </Link>
         </li>
       

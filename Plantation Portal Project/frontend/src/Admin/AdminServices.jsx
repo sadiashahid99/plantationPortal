@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 import useFetch from "../useFetch";
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert'; 
@@ -9,8 +9,14 @@ import {storage} from '../firebase';
 // import './css/admin-services.css'
 // import './css/orders.css'
 import TopBar from "./TopBar";
+import { useUser } from "../userContext";
 
 const AdminServices = () => {
+  const navigate = useNavigate();
+  const user = useUser();
+  if (!user._id) {
+    navigate("/login");
+  }
     const { error, isPending, data: services } = useFetch('http://localhost:5000/services/')
 
     const handleDelete = (id)=>{   
@@ -56,7 +62,6 @@ const AdminServices = () => {
       }
       
     return ( 
-      <div className="page">
         <section className="home-section">
             <div className="home-content">
                 <TopBar/>
@@ -103,7 +108,6 @@ const AdminServices = () => {
                 </div>
             </div>
         </section>
-        </div>
      );
 }
  

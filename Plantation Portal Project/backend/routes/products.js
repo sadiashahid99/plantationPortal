@@ -107,6 +107,19 @@ router.post("/allStoreProducts", async (req, res) => {
   }
 });
 
+router.post("/allStoreProducts/:id", async (req, res) => {
+  try {
+    const sellerId = req.params.id;
+    //console.log(sellerId);
+    //console.log(req.body);
+    const storeProducts = await Products.find({ storeId: sellerId });
+    res.status(200).json(storeProducts);
+  } catch (err) {
+    console.log(err);
+    res.json([]);
+  }
+});
+
 function getDate(params) {
   const d = new Date();
   let date = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
